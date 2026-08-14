@@ -1,0 +1,11 @@
+<% content_for :title, "Edit income" %>
+
+<h1>Edit income</h1>
+
+<%= render "form", monthly_income: @monthly_income %>
+
+<br>
+
+<div>
+  <%= link_to "Back to dashboard", root_path(month: @monthly_income.month) %>
+</div>

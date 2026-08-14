@@ -45,10 +45,4 @@ class SpendingEntriesController < ApplicationController
     def spending_entry_params
       params.expect(spending_entry: [ :date, :amount, :description, :category_id ])
     end
-
-    def parse_month(value)
-      Date.parse(value).beginning_of_month
-    rescue TypeError, ArgumentError
-      Date.current.beginning_of_month
-    end
 end
