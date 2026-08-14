@@ -10,7 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_08_14_173444) do
+ActiveRecord::Schema[8.1].define(version: 2026_08_14_193915) do
+  create_table "categories", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.string "name", null: false
+    t.datetime "updated_at", null: false
+    t.integer "user_id", null: false
+    t.index "user_id, LOWER(name)", name: "index_categories_on_user_id_and_lower_name", unique: true
+    t.index ["user_id"], name: "index_categories_on_user_id"
+  end
+
   create_table "sessions", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.string "ip_address"
@@ -28,5 +37,6 @@ ActiveRecord::Schema[8.1].define(version: 2026_08_14_173444) do
     t.index ["email_address"], name: "index_users_on_email_address", unique: true
   end
 
+  add_foreign_key "categories", "users"
   add_foreign_key "sessions", "users"
 end
