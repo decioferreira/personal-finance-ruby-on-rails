@@ -1,0 +1,11 @@
+<% content_for :title, "Editing spending entry" %>
+
+<h1>Editing spending entry</h1>
+
+<%= render "form", spending_entry: @spending_entry %>
+
+<br>
+
+<div>
+  <%= link_to "Back to spending entries", spending_entries_path %>
+</div>

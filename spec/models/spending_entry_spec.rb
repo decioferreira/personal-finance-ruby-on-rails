@@ -46,6 +46,30 @@ RSpec.describe SpendingEntry, type: :model do
     end
   end
 
+  describe ".for_month" do
+    it "includes entries on the first and last day of the month" do
+      first_day = create(:spending_entry, date: Date.new(2026, 8, 1))
+      last_day = create(:spending_entry, date: Date.new(2026, 8, 31))
+
+      result = SpendingEntry.for_month(Date.new(2026, 8, 15))
+
+      expect(result).to contain_exactly(first_day, last_day)
+    end
+
+    it "excludes entries from the previous and next month" do
+      create(:spending_entry, date: Date.new(2026, 7, 31))
+      create(:spending_entry, date: Date.new(2026, 9, 1))
+
+      result = SpendingEntry.for_month(Date.new(2026, 8, 15))
+
+      expect(result).to be_empty
+    end
+
+    it "returns an empty relation when there is no spending" do
+      expect(SpendingEntry.for_month(Date.new(2026, 8, 1))).to be_empty
+    end
+  end
+
   describe "deleting a category with spending entries" do
     it "is blocked and keeps the spending entry intact" do
       entry = create(:spending_entry)

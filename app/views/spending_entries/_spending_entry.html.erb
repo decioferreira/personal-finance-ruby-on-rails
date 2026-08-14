@@ -1,0 +1,9 @@
+<div id="<%= dom_id spending_entry %>">
+  <span><%= spending_entry.date.to_fs(:long) %></span>
+  <span><%= spending_entry.category.name %></span>
+  <span><%= spending_entry.description %></span>
+  <strong><%= number_to_currency(spending_entry.amount) %></strong>
+  <%= link_to "Edit", edit_spending_entry_path(spending_entry) %>
+  <%= button_to "Delete", spending_entry_path(spending_entry), method: :delete,
+        form: { data: { turbo_confirm: "Are you sure?" } } %>
+</div>

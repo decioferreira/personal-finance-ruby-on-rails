@@ -1,0 +1,21 @@
+<p style="color: green"><%= notice %></p>
+
+<% content_for :title, "Spending" %>
+
+<h1>Spending</h1>
+
+<nav>
+  <%= link_to "← Previous month", spending_entries_path(month: @month.prev_month) %>
+  <strong><%= @month.strftime("%B %Y") %></strong>
+  <%= link_to "Next month →", spending_entries_path(month: @month.next_month) %>
+</nav>
+
+<div id="spending_entries">
+  <% @spending_entries.each do |spending_entry| %>
+    <%= render spending_entry %>
+  <% end %>
+</div>
+
+<p><strong>Total: <%= number_to_currency(@total) %></strong></p>
+
+<%= link_to "New spending entry", new_spending_entry_path %>

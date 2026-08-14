@@ -7,6 +7,8 @@ class SpendingEntry < ApplicationRecord
   validates :amount, presence: true, numericality: { greater_than: 0 }
   validate :category_belongs_to_user
 
+  scope :for_month, ->(date) { where(date: date.all_month) }
+
   private
     def category_belongs_to_user
       return if category.nil? || user.nil?
