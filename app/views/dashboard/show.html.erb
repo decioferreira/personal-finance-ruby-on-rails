@@ -1,0 +1,53 @@
+<p style="color: green"><%= notice %></p>
+
+<% content_for :title, "Dashboard" %>
+
+<nav>
+  <%= link_to "← Previous month", root_path(month: @month.prev_month) %>
+  <strong><%= @month.strftime("%B %Y") %></strong>
+  <%= link_to "Next month →", root_path(month: @month.next_month) %>
+</nav>
+
+<section>
+  <div>
+    <h2>Income</h2>
+    <p><%= number_to_currency(@income&.amount || 0) %></p>
+    <% if @income %>
+      <%= link_to "Edit income", edit_monthly_income_path(@income) %>
+    <% else %>
+      <%= link_to "Add income", new_monthly_income_path(month: @month) %>
+    <% end %>
+  </div>
+
+  <div>
+    <h2>Spent</h2>
+    <p><%= number_to_currency(@total_spent) %></p>
+  </div>
+
+  <div>
+    <h2>Remaining</h2>
+    <p><%= number_to_currency(@remaining) %></p>
+  </div>
+</section>
+
+<section data-controller="dashboard" data-dashboard-category-totals-value="<%= @category_totals.map { |name, amount| { category: name, amount: amount.to_s } }.to_json %>">
+  <h2>Spending by category</h2>
+
+  <% if @category_totals.any? %>
+    <canvas data-dashboard-target="canvas"></canvas>
+
+    <ul>
+      <% @category_totals.each do |name, amount| %>
+        <li><%= name %>: <%= number_to_currency(amount) %> (<%= number_to_percentage(amount / @total_spent * 100, precision: 0) %>)</li>
+      <% end %>
+    </ul>
+  <% else %>
+    <p>No spending recorded for this month yet.</p>
+  <% end %>
+</section>
+
+<p>
+  <%= link_to "View all spending entries", spending_entries_path(month: @month) %>
+  |
+  <%= link_to "Manage categories", categories_path %>
+</p>
