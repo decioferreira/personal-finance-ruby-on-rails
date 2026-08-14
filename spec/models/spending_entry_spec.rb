@@ -36,6 +36,16 @@ RSpec.describe SpendingEntry, type: :model do
     end
   end
 
+  describe "category ownership" do
+    it "is invalid if the category belongs to a different user" do
+      other_users_category = create(:category)
+      entry = build(:spending_entry, category: other_users_category)
+
+      expect(entry).not_to be_valid
+      expect(entry.errors[:category]).to be_present
+    end
+  end
+
   describe "deleting a category with spending entries" do
     it "is blocked and keeps the spending entry intact" do
       entry = create(:spending_entry)
