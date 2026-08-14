@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_08_14_193915) do
+ActiveRecord::Schema[8.1].define(version: 2026_08_14_214905) do
   create_table "categories", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.string "name", null: false
@@ -29,6 +29,20 @@ ActiveRecord::Schema[8.1].define(version: 2026_08_14_193915) do
     t.index ["user_id"], name: "index_sessions_on_user_id"
   end
 
+  create_table "spending_entries", force: :cascade do |t|
+    t.decimal "amount", precision: 12, scale: 2, null: false
+    t.integer "category_id", null: false
+    t.datetime "created_at", null: false
+    t.date "date", null: false
+    t.string "description", null: false
+    t.datetime "updated_at", null: false
+    t.integer "user_id", null: false
+    t.index ["category_id"], name: "index_spending_entries_on_category_id"
+    t.index ["user_id", "date"], name: "index_spending_entries_on_user_id_and_date"
+    t.index ["user_id"], name: "index_spending_entries_on_user_id"
+    t.check_constraint "amount > 0", name: "spending_entries_amount_positive"
+  end
+
   create_table "users", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.string "email_address", null: false
@@ -39,4 +53,6 @@ ActiveRecord::Schema[8.1].define(version: 2026_08_14_193915) do
 
   add_foreign_key "categories", "users"
   add_foreign_key "sessions", "users"
+  add_foreign_key "spending_entries", "categories", on_delete: :restrict
+  add_foreign_key "spending_entries", "users"
 end
