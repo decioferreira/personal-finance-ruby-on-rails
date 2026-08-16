@@ -73,3 +73,5 @@ group :test do
   # Match Active Record validations/associations with concise matchers
   gem "shoulda-matchers"
 end
+
+gem "tailwindcss-rails", "~> 4.6"

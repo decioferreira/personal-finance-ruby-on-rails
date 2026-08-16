@@ -33,3 +33,6 @@
 # Ignore key files for decrypting credentials and more.
 /config/*.key
 
+# Ignore compiled Tailwind CSS build output (tailwindcss-rails install).
+/app/assets/builds/*
+!/app/assets/builds/.keep
