@@ -1,0 +1,26 @@
+<header class="border-b border-gray-200 bg-white">
+  <div class="container mx-auto flex flex-wrap items-center justify-between gap-4 px-5 py-3">
+    <div class="flex flex-wrap items-center gap-6">
+      <%= link_to root_path, class: "flex items-center gap-2" do %>
+        <span class="flex h-8 w-8 items-center justify-center rounded-lg bg-indigo-600 text-white shadow-sm">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 1v22M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
+          </svg>
+        </span>
+        <span class="font-semibold text-gray-900">Personal Finance</span>
+      <% end %>
+
+      <nav class="flex items-center gap-1">
+        <%= nav_link_to "Dashboard", root_path %>
+        <%= nav_link_to "Spending", spending_entries_path %>
+        <%= nav_link_to "Categories", categories_path %>
+      </nav>
+    </div>
+
+    <div class="flex items-center gap-4">
+      <span class="hidden text-sm text-gray-500 sm:inline"><%= Current.user.email_address %></span>
+      <%= button_to "Sign out", session_path, method: :delete,
+            class: "rounded-lg px-3 py-2 text-sm font-medium text-gray-600 hover:bg-gray-50 hover:text-gray-900 transition cursor-pointer" %>
+    </div>
+  </div>
+</header>
