@@ -1,21 +1,29 @@
-<p style="color: green"><%= notice %></p>
-
 <% content_for :title, "Spending" %>
 
-<h1>Spending</h1>
+<div class="w-full max-w-3xl mx-auto">
+  <%= render "shared/notice" %>
 
-<nav>
-  <%= link_to "← Previous month", spending_entries_path(month: @month.prev_month) %>
-  <strong><%= @month.strftime("%B %Y") %></strong>
-  <%= link_to "Next month →", spending_entries_path(month: @month.next_month) %>
-</nav>
+  <div class="mb-8 flex items-center justify-between">
+    <h1 class="text-2xl font-semibold text-gray-900">Spending</h1>
+    <%= link_to "New spending entry", new_spending_entry_path,
+          class: "rounded-lg bg-indigo-600 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 transition" %>
+  </div>
 
-<div id="spending_entries">
-  <% @spending_entries.each do |spending_entry| %>
-    <%= render spending_entry %>
+  <%= render "shared/month_nav", month: @month, prev_path: spending_entries_path(month: @month.prev_month), next_path: spending_entries_path(month: @month.next_month) %>
+
+  <% if @spending_entries.any? %>
+    <div id="spending_entries" class="divide-y divide-gray-100 rounded-2xl bg-white shadow-sm ring-1 ring-gray-900/5">
+      <% @spending_entries.each do |spending_entry| %>
+        <%= render spending_entry %>
+      <% end %>
+    </div>
+
+    <div class="mt-4 flex justify-end px-1">
+      <span class="text-sm font-semibold text-gray-900">Total: <%= number_to_currency(@total) %></span>
+    </div>
+  <% else %>
+    <div class="rounded-2xl bg-white p-10 text-center text-sm text-gray-500 shadow-sm ring-1 ring-gray-900/5">
+      No spending recorded for this month yet.
+    </div>
   <% end %>
 </div>
-
-<p><strong>Total: <%= number_to_currency(@total) %></strong></p>
-
-<%= link_to "New spending entry", new_spending_entry_path %>

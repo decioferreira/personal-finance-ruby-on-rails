@@ -1,13 +1,23 @@
-<p style="color: green"><%= notice %></p>
-
 <% content_for :title, "Categories" %>
 
-<h1>Categories</h1>
+<div class="w-full max-w-2xl mx-auto">
+  <%= render "shared/notice" %>
 
-<div id="categories">
-  <% @categories.each do |category| %>
-    <%= render category %>
+  <div class="mb-8 flex items-center justify-between">
+    <h1 class="text-2xl font-semibold text-gray-900">Categories</h1>
+    <%= link_to "New category", new_category_path,
+          class: "rounded-lg bg-indigo-600 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 transition" %>
+  </div>
+
+  <% if @categories.any? %>
+    <div id="categories" class="divide-y divide-gray-100 rounded-2xl bg-white shadow-sm ring-1 ring-gray-900/5">
+      <% @categories.each do |category| %>
+        <%= render category %>
+      <% end %>
+    </div>
+  <% else %>
+    <div class="rounded-2xl bg-white p-10 text-center text-sm text-gray-500 shadow-sm ring-1 ring-gray-900/5">
+      No categories yet.
+    </div>
   <% end %>
 </div>
-
-<%= link_to "New category", new_category_path %>

@@ -1,0 +1,15 @@
+<div class="mb-8 flex items-center justify-center gap-6 rounded-xl bg-white px-4 py-3 shadow-sm ring-1 ring-gray-900/5">
+  <%= link_to prev_path, class: "rounded-lg p-2 text-gray-500 hover:bg-gray-50 hover:text-gray-900 transition", "aria-label": "Previous month" do %>
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+      <path fill-rule="evenodd" d="M12.7 15.7a1 1 0 0 1-1.4 0l-5-5a1 1 0 0 1 0-1.4l5-5a1 1 0 1 1 1.4 1.4L8.42 10l4.3 4.3a1 1 0 0 1 0 1.4Z" clip-rule="evenodd" />
+    </svg>
+  <% end %>
+
+  <span class="min-w-[9rem] text-center text-sm font-semibold text-gray-900"><%= month.strftime("%B %Y") %></span>
+
+  <%= link_to next_path, class: "rounded-lg p-2 text-gray-500 hover:bg-gray-50 hover:text-gray-900 transition", "aria-label": "Next month" do %>
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+      <path fill-rule="evenodd" d="M7.3 4.3a1 1 0 0 1 1.4 0l5 5a1 1 0 0 1 0 1.4l-5 5a1 1 0 0 1-1.4-1.4l4.3-4.3-4.3-4.3a1 1 0 0 1 0-1.4Z" clip-rule="evenodd" />
+    </svg>
+  <% end %>
+</div>

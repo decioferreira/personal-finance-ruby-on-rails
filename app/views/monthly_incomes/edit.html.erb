@@ -1,11 +1,11 @@
 <% content_for :title, "Edit income" %>
 
-<h1>Edit income</h1>
+<div class="w-full max-w-lg mx-auto">
+  <h1 class="mb-8 text-2xl font-semibold text-gray-900">Edit income</h1>
 
-<%= render "form", monthly_income: @monthly_income %>
+  <%= render "form", monthly_income: @monthly_income %>
 
-<br>
-
-<div>
-  <%= link_to "Back to dashboard", root_path(month: @monthly_income.month) %>
+  <div class="mt-6">
+    <%= link_to "← Back to dashboard", root_path(month: @monthly_income.month), class: "text-sm font-medium text-gray-600 hover:text-gray-900" %>
+  </div>
 </div>

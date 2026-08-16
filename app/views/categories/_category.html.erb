@@ -1,6 +1,9 @@
-<div id="<%= dom_id category %>">
-  <strong><%= category.name %></strong>
-  <%= link_to "Edit", edit_category_path(category) %>
-  <%= button_to "Delete", category_path(category), method: :delete,
-        form: { data: { turbo_confirm: "Are you sure?" } } %>
+<div id="<%= dom_id category %>" class="flex items-center justify-between gap-4 px-5 py-4">
+  <span class="font-medium text-gray-900"><%= category.name %></span>
+  <div class="flex items-center gap-4">
+    <%= link_to "Edit", edit_category_path(category), class: "text-sm font-medium text-indigo-600 hover:text-indigo-500" %>
+    <%= button_to "Delete", category_path(category), method: :delete,
+          form: { data: { turbo_confirm: "Are you sure?" }, class: "inline-block" },
+          class: "text-sm font-medium text-red-600 hover:text-red-700 cursor-pointer" %>
+  </div>
 </div>

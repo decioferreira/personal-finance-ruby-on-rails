@@ -1,9 +1,17 @@
-<div id="<%= dom_id spending_entry %>">
-  <span><%= spending_entry.date.to_fs(:long) %></span>
-  <span><%= spending_entry.category.name %></span>
-  <span><%= spending_entry.description %></span>
-  <strong><%= number_to_currency(spending_entry.amount) %></strong>
-  <%= link_to "Edit", edit_spending_entry_path(spending_entry) %>
-  <%= button_to "Delete", spending_entry_path(spending_entry), method: :delete,
-        form: { data: { turbo_confirm: "Are you sure?" } } %>
+<div id="<%= dom_id spending_entry %>" class="flex flex-wrap items-center justify-between gap-4 px-5 py-4">
+  <div class="flex flex-col">
+    <span class="text-sm text-gray-500"><%= spending_entry.date.to_fs(:long) %></span>
+    <span class="font-medium text-gray-900"><%= spending_entry.description %></span>
+  </div>
+
+  <div class="flex items-center gap-6">
+    <span class="rounded-full bg-gray-100 px-2.5 py-1 text-xs font-medium text-gray-600"><%= spending_entry.category.name %></span>
+    <span class="font-semibold text-gray-900"><%= number_to_currency(spending_entry.amount) %></span>
+    <div class="flex items-center gap-4">
+      <%= link_to "Edit", edit_spending_entry_path(spending_entry), class: "text-sm font-medium text-indigo-600 hover:text-indigo-500" %>
+      <%= button_to "Delete", spending_entry_path(spending_entry), method: :delete,
+            form: { data: { turbo_confirm: "Are you sure?" }, class: "inline-block" },
+            class: "text-sm font-medium text-red-600 hover:text-red-700 cursor-pointer" %>
+    </div>
+  </div>
 </div>
