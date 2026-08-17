@@ -37,13 +37,7 @@ jobs:
           bundler-cache: true
 
       - name: Scan for security vulnerabilities in JavaScript dependencies
-        run: |
-          for i in 1 2 3; do
-            bin/importmap audit && exit 0
-            echo "Attempt $i failed (npm registry may be flaky), retrying..." >&2
-            sleep 5
-          done
-          exit 1
+        run: bin/importmap audit
 
   lint:
     runs-on: ubuntu-latest
